@@ -29,11 +29,13 @@ class EventsController < ApplicationController
 
   def create
     @event = current_user.events.build(event_params)
-    if @event.save
+    if @event.only_woman && !current_user.woman?
+      flash.now[:alert] = '女性限定のイベントは作成できません'
+      render :new
+    elsif @event.save
       User.all.find_each do |user|
         NotificationFacade.created_event(@event, user)
       end
-
       redirect_to event_path(@event)
     else
       render :new
@@ -60,6 +62,6 @@ class EventsController < ApplicationController
   private
 
   def event_params
-    params.require(:event).permit(:title, :content, :held_at, :prefecture_id, :thumbnail)
+    params.require(:event).permit(:title, :content, :held_at, :prefecture_id, :only_woman, :thumbnail)
   end
 end
