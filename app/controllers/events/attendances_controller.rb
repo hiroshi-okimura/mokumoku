@@ -19,7 +19,7 @@ class Events::AttendancesController < ApplicationController
   end
 
   def only_woman
-    unless current_user.female?
+    unless current_user.woman?
       redirect_to root_path, alert: 'このイベントは女性限定です'
     end
   end
