@@ -17,6 +17,10 @@
     <%= f.collection_select :prefecture_id, Prefecture.all, :id, :name, {}, class: 'form-select' %>
   </div>
   <div class="mb-3">
+    <%= f.label :only_woman %>
+    <%= f.check_box :only_woman, class: 'form-check' %>
+  </div>
+  <div class="mb-3">
     <%= f.label :thumbnail %>
     <%= f.file_field :thumbnail, class: 'form-control js-file-select-preview mb-3', accept: 'image/*', data: { target: '#preview-target' } %>
     <%= image_tag f.object.decorate.thumbnail, id: 'preview-target', class: 'w-100 border' %>
