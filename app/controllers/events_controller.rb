@@ -29,7 +29,7 @@ class EventsController < ApplicationController
 
   def create
     @event = current_user.events.build(event_params)
-    if @event.only_woman && current_user.gender != 'woman'
+    if @event.only_woman && current_user.woman?
       flash.now[:alert] = '男性は女性限定のイベントを作成できません'
       render :new
     elsif @event.save
