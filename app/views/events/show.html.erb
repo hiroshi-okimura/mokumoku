@@ -44,6 +44,9 @@
           イベントの説明
         </div>
         <div class="card-body">
+          <% if @event.only_woman %>
+            <span class="badge bg-primary">女性限定</span>
+          <% end %>
           <%= simple_format @event.content %>
         </div>
       </div>
